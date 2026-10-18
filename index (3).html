@@ -1,0 +1,348 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Land Health & Restoration Monitor</title><link rel="icon" href="data:,"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#f6f8f3;--card:#fff;--tx:#1d2b1f;--mut:#5d6b60;--pri:#2f7d4f;--bd:#dfe6da;--g:#2e9e5b;--y:#e0a800;--r:#d64545;--b:#3b82d6;--p:#8b5cd6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#121a14;--card:#1b261e;--tx:#e6efe7;--mut:#9db0a1;--bd:#2c3b30}}
+:root[data-theme=dark]{--bg:#121a14;--card:#1b261e;--tx:#e6efe7;--mut:#9db0a1;--bd:#2c3b30}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.w{max-width:1100px;margin:auto;padding:14px}h1,h2,h3{margin:.3em 0}.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin:10px 0}
+.hero{background:linear-gradient(135deg,#1f5e3a,#4aa36b);color:#fff;border-radius:16px;padding:34px 20px;text-align:center}.hero h1{font-size:clamp(22px,5vw,36px)}
+button,.btn{background:var(--pri);color:#fff;border:0;border-radius:8px;padding:9px 14px;cursor:pointer;font:inherit}button.s{background:transparent;color:var(--pri);border:1px solid var(--pri)}.hero button{background:#fff;color:#1f5e3a;margin:4px}
+input,select,textarea{width:100%;padding:8px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit}label{font-size:13px;color:var(--mut);display:block;margin-top:8px}
+.g{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.g2{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+nav{display:flex;gap:6px;overflow-x:auto;padding:6px 0}nav button{background:var(--card);color:var(--tx);border:1px solid var(--bd);white-space:nowrap}nav button.on{background:var(--pri);color:#fff}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}.big{font-size:34px;font-weight:700}.mut{color:var(--mut);font-size:13px}
+.bar{height:10px;background:var(--bd);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%}
+.tag{display:inline-block;padding:2px 9px;border-radius:99px;color:#fff;font-size:12px}table{width:100%;border-collapse:collapse}td,th{padding:7px;border-bottom:1px solid var(--bd);text-align:left;font-size:14px}.sc{overflow-x:auto}
+.warn{border-left:5px solid var(--r)}.flow span{display:inline-block;background:var(--card);border:1px solid var(--bd);border-radius:99px;padding:3px 10px;margin:3px;font-size:13px;color:var(--tx)}
+.msg{padding:6px 10px;border-radius:10px;margin:4px 0;max-width:80%}.me{background:var(--pri);color:#fff;margin-left:auto}.ot{background:var(--bd)}
+img.th{width:48px;height:36px;object-fit:cover;border-radius:4px}img.pv{max-width:100%;max-height:220px;border-radius:8px}
+body{font-family:Poppins,system-ui,sans-serif;background:radial-gradient(at 10% 0,#c4f0d3 0,transparent 45%),radial-gradient(at 95% 8%,#cde3ff 0,transparent 40%),var(--bg);background-attachment:fixed}
+:root[data-theme=dark] body,:root:not([data-theme=light]) body{background-blend-mode:normal}
+.card{box-shadow:0 6px 22px #1f5e3a1f;transition:.25s;animation:up .5s backwards}.card:hover{transform:translateY(-2px);box-shadow:0 12px 32px #1f5e3a38}@keyframes up{from{opacity:0;transform:translateY(12px)}}
+.hero{background:linear-gradient(120deg,#0b4a2c,#2e9e5b,#2a7fd0,#0b4a2c);background-size:300% 300%;animation:mv 12s ease infinite;box-shadow:0 14px 40px #0b4a2c55;padding:54px 20px}.hero h1{letter-spacing:.3px;text-shadow:0 3px 14px #0006}@keyframes mv{50%{background-position:100% 50%}}
+.hero button{font-weight:700;box-shadow:0 6px 18px #0004;animation:pl 2.4s infinite}@keyframes pl{50%{transform:scale(1.06)}}
+button{background:linear-gradient(135deg,#2e9e5b,#1f7a8c);transition:.2s;font-weight:600}button:hover{transform:translateY(-1px);filter:brightness(1.12)}button.s{background:transparent}nav button.on{background:linear-gradient(135deg,#2e9e5b,#2a7fd0)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 14px;box-shadow:0 4px 16px #0001}
+.big{background:linear-gradient(90deg,#2e9e5b,#2a7fd0);-webkit-background-clip:text;background-clip:text}.bar i{transition:width 1s}.bar{height:12px}
+.tag{box-shadow:0 2px 8px #0003}.card h3{background:linear-gradient(90deg,var(--pri),#2a7fd0);-webkit-background-clip:text;background-clip:text;color:transparent}
+@media print{nav,.top button,.noprint{display:none!important}}
+</style></head><body><div class="w" id="app"></div>
+<script>
+const T={en:{dash:"Dashboard",land:"My Land",analyze:"Analyze",history:"History & Trends",map:"Map",projects:"Restoration",experts:"Experts & Chat",notes:"Notifications",out:"Logout",tag:"Detect. Understand. Restore. Monitor.",start:"Start Analysis",login:"Login / Register"},
+hi:{dash:"डैशबोर्ड",land:"मेरी भूमि",analyze:"विश्लेषण",history:"इतिहास व रुझान",map:"नक्शा",projects:"पुनर्स्थापन",experts:"विशेषज्ञ व चैट",notes:"सूचनाएँ",out:"लॉगआउट",tag:"पहचानें। समझें। पुनर्स्थापित करें। निगरानी करें।",start:"विश्लेषण शुरू करें",login:"लॉगिन / पंजीकरण"},
+mr:{dash:"डॅशबोर्ड",land:"माझी जमीन",analyze:"विश्लेषण",history:"इतिहास व कल",map:"नकाशा",projects:"पुनर्स्थापना",experts:"तज्ज्ञ व चॅट",notes:"सूचना",out:"लॉगआउट",tag:"ओळखा. समजून घ्या. पुनर्संचयित करा. निरीक्षण करा.",start:"विश्लेषण सुरू करा",login:"लॉगिन / नोंदणी"}};
+const ROLES={farmer:"👨‍🌾 Farmer",officer:"🏛️ Agriculture Officer",org:"🌱 Environmental Organization",researcher:"🎓 Researcher / Student",gov:"🏛️ Government Authority",expert:"👨‍🔬 Soil / Environmental Expert",admin:"Admin"};
+const NAV={farmer:["dash","land","analyze","history","projects","experts","notes"],officer:["dash","analyze","history","map","projects","experts","notes"],org:["dash","map","history","projects","experts","notes"],researcher:["dash","history","map","experts","notes"],gov:["dash","map","projects","notes"],expert:["dash","experts","notes"],admin:["dash","map","experts","notes"]};
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const cls=h=>h>=70?["Healthy","var(--g)","🟢"]:h>=40?["Moderately Degraded","var(--y)","🟡"]:["Highly Degraded","var(--r)","🔴"];
+function seed(){const P=[["LAND-PUNE-001","Shivar North","Pune",18.52,73.85,"@me",[88,74,58]],["LAND-PUNE-002","Orchard Plot","Pune",18.6,73.9,"@me",[80,82,85]],["LAND-NSK-001","Vineyard B","Nashik",20.0,73.79,"Ravi K",[70,66,61]],["LAND-SLP-001","Dry Field","Solapur",17.67,75.9,"Meena P",[45,38,33]],["LAND-KOL-001","River Bank","Kolhapur",16.7,74.24,"Anil D",[90,89,91]],["LAND-NGP-001","Cotton Plot","Nagpur",21.15,79.09,"Sunil T",[60,52,41]]];
+const ds=[Date.parse("2026-01-15"),Date.parse("2026-03-15"),Date.parse("2026-05-15")];
+return{user:null,lang:"en",plots:P.map(p=>({id:p[0],name:p[1],district:p[2],state:"Maharashtra",lat:p[3],lng:p[4],owner:p[5],type:"Agricultural",crop:"Mixed",area:"2 ha"})),
+an:P.flatMap(p=>p[6].map((h,i)=>({plot:p[0],ts:ds[i],health:h,deg:100-h,cls:cls(h)[0],soil:null,soilScore:null,img:null,seed:1}))),
+proj:[{plot:"LAND-PUNE-001",progress:55,done:false,ms:[["Soil assessment",2],["Expert consultation",2],["Soil conservation activity",1],["Vegetation restoration",0],["Follow-up analysis",0]],tl:[["January","Problem identified"],["February","Soil test completed"],["March","Expert recommendation received"],["April","Restoration activity started"]]},{plot:"LAND-KOL-001",progress:100,done:true,ms:[["Soil assessment",2],["Vegetation restoration",2]],tl:[["February","Project started"],["August","Improvement detected"]]}],
+read:{},chat:[],lastNo:0}}
+let S;try{S=JSON.parse(localStorage.getItem("lh2"))}catch(e){}S=S||seed();const save=()=>{try{localStorage.setItem("lh2",JSON.stringify(S))}catch(e){}};
+let view="dash",last=null,sel=null,pending=null,cmp=[0,0];const t=k=>(T[S.lang]||T.en)[k]||T.en[k]||k;
+const U=()=>S.user,role=()=>U()?.role;
+const mine=()=>role()=="farmer"?S.plots.filter(p=>p.owner=="@me"||p.owner==U().name):S.plots;
+const ans=id=>S.an.filter(a=>a.plot==id).sort((a,b)=>a.ts-b.ts);
+const latest=id=>ans(id).pop();
+const pst=id=>{const pr=S.proj.find(x=>x.plot==id);if(pr)return pr.done?["Restoration Completed","var(--p)","🟣"]:["Restoration in Progress","var(--b)","🔵"];const a=latest(id);return a?cls(a.health):["No data","var(--mut)","⚪"]};
+const own=p=>role()=="farmer"||role()=="officer"||role()=="admin"?(p.owner=="@me"?U().name:p.owner):"Hidden (privacy)";
+const pn=p=>role()=="researcher"?"Plot #"+(S.plots.indexOf(p)+1):p.id;
+const fd=ts=>new Date(ts).toLocaleDateString(LC(),{day:"2-digit",month:"short",year:"numeric"});
+function warns(){const o=[];mine().forEach(p=>{const a=ans(p.id);if(a.length>1){const mx=Math.max(...a.slice(0,-1).map(x=>x.health)),l=a[a.length-1].health;if(mx-l>=15)o.push({id:"w"+p.id,t:"⚠️ Early warning — "+pn(p),m:`Land health fell: ${mx} → ${l}. Schedule a new soil assessment and consult an agriculture/soil expert.`,p})}
+if(a.length&&Date.now()-a[a.length-1].ts>90*864e5)o.push({id:"r"+p.id,t:"📊 Monitoring reminder — "+pn(p),m:"Time for your next land-health assessment."});
+if(a.length&&a.every(x=>!x.soil))o.push({id:"s"+p.id,t:"🧪 Soil test reminder — "+pn(p),m:"This land has no measured soil-test data yet."})});
+S.chat.filter(c=>c.role==role()).forEach(c=>{if(c.msgs.length>1&&c.msgs[c.msgs.length-1].from!="me")o.push({id:"c"+c.id+c.msgs.length,t:"💬 New message",m:"New reply from "+c.with})});return o}
+function chart(pts,col="#2f7d4f"){if(pts.length<1)return"<p class=mut>No data.</p>";const W=500,H=170,x=i=>40+i*(440/Math.max(1,pts.length-1)),y=v=>150-v*1.3;
+return`<svg viewBox="0 0 ${W} ${H}" style="width:100%"><g stroke="#8883" >${[0,50,100].map(v=>`<line x1=40 x2=480 y1=${y(v)} y2=${y(v)}/>`).join("")}</g>${[0,50,100].map(v=>`<text x=4 y=${y(v)+4} font-size=11 fill="#888">${v}</text>`).join("")}<polyline fill=none stroke="${col}" stroke-width=3 points="${pts.map((p,i)=>x(i)+","+y(p[1])).join(" ")}"/>${pts.map((p,i)=>`<circle cx=${x(i)} cy=${y(p[1])} r=4 fill="${col}"/><text x=${x(i)} y=${y(p[1])-9} font-size=11 text-anchor=middle fill="#888">${p[1]}</text><text x=${x(i)} y=167 font-size=10 text-anchor=middle fill="#888">${esc(p[0])}</text>`).join("")}</svg>`}
+const bar=(v,c)=>`<div class=bar><i style="width:${v}%;background:${c}"></i></div>`;
+// soil
+const SP=[["ph","pH",6,7.5,5.5,8],["n","Nitrogen (kg/ha)",280,560,140,700],["p","Phosphorus (kg/ha)",11,25,5,40],["k","Potassium (kg/ha)",120,280,60,400],["mo","Moisture (%)",15,35,8,45],["oc","Organic carbon (%)",.5,.75,.3,1.5],["ec","EC (dS/m)",0,1,0,2]];
+function rate(k,v,lo,hi,mn,mx){if(v===""||v==null||isNaN(v))return null;v=+v;let lab=v<lo?"Low":v>hi?"High":"Suitable";let sc=v>=lo&&v<=hi?100:v<lo?Math.max(20,100*(v-mn)/(lo-mn)):Math.max(20,100*(mx-v)/(mx-hi));if(k=="ec"||k=="oc"||k=="n"||k=="p"||k=="k"){if(v>hi&&k!="ec"){lab="High/Adequate";sc=90}if(k=="ec"&&v>hi){lab="Salinity risk"}}return[lab,Math.round(Math.min(100,Math.max(0,sc)))]}
+function soilEval(o){const r={};let s=[];SP.forEach(([k,n,lo,hi,mn,mx])=>{const x=rate(k,o[k],lo,hi,mn,mx);r[k]=x;if(x)s.push(x[1])});return{r,score:s.length>=3?Math.round(s.reduce((a,b)=>a+b)/s.length):null,n:s.length}}
+// visual analysis
+function visual(img){const c=document.createElement("canvas");c.width=c.height=80;const x=c.getContext("2d");x.drawImage(img,0,0,80,80);const d=x.getImageData(0,0,80,80).data;let g=0,b=0,dry=0,n=6400;
+for(let i=0;i<d.length;i+=4){const r=d[i],gg=d[i+1],bl=d[i+2];if(gg>r*1.04&&gg>bl*1.08)g++;else if(r>gg*.9&&r>bl*1.1){b++;if(r>150&&gg>110)dry++}}
+const veg=g/n,bare=b/n,dr=dry/n;const deg=Math.round(Math.min(100,Math.max(0,100*(.65*(1-Math.min(1,veg/.6))+.35*Math.min(1,bare/.7)))));
+const th=document.createElement("canvas");th.width=120;th.height=90;th.getContext("2d").drawImage(img,0,0,120,90);
+const lv=v=>v>.5?"High":v>.2?"Moderate":"Low";return{veg,bare,dr,deg,thumb:th.toDataURL("image/jpeg",.6),ind:[["🌿 Vegetation coverage",lv(veg)],["🟤 Exposed soil",lv(bare)],["☀️ Visible dryness",lv(dr*2)],["⚠️ Visible erosion signs",bare>.55&&veg<.15?"Possible":"Not detected"]]}}
+// views
+function home(){const l=["en","hi","mr"];return`<div class=top><b>🌍 Land Health Monitor</b><select style="width:auto" onchange="setLang(this.value)">${l.map(x=>`<option value=${x} ${S.lang==x?"selected":""}>${{en:"English",hi:"हिंदी",mr:"मराठी"}[x]}</option>`).join("")}</select></div>
+<div class=hero><h1>AI-Based Land Health & Degradation Monitoring System</h1><p>${t("tag")}</p><button onclick="document.getElementById('auth').scrollIntoView({behavior:'smooth'})">${t("start")}</button><button onclick="document.getElementById('auth').scrollIntoView({behavior:'smooth'})">${t("login")}</button></div>
+<div class=g2><div class=card><h3>What is land degradation?</h3><p>Decline in land's ability to support vegetation and crops, caused by erosion, overgrazing, deforestation, poor irrigation, salinity and drought. It leads to soil fertility loss, vegetation loss, moisture stress and eventually desertification.</p></div><div class=card><h3>Why early detection matters</h3><p>Farmers, agriculture officers, NGOs, researchers and authorities can act before damage becomes costly to reverse — by tracking change over time instead of reacting late.</p></div></div>
+<div class=card><h3>How it works</h3><div class=flow>${["Upload / Enter Data","AI & Soil Assessment","Land Health Score","Classification","Explanation","Recommendation","Monitoring","Early Warning","Restoration Tracking"].map(x=>`<span>${x}</span>`).join("→")}</div></div>
+<div class=card id=auth><h3>Login / Register</h3><label>Name</label><input id=nm placeholder="Your name"><label>Select your role</label><select id=rl>${Object.entries(ROLES).map(([k,v])=>`<option value=${k}>${v}</option>`).join("")}</select><p class=mut>Prototype: accounts are stored only in this browser (no server). Production use needs real authentication and verification of government/expert roles.</p><button onclick="login()">Continue</button></div>`}
+function shell(c){const n=NAV[role()];return`<div class=top><b>🌍 Land Health Monitor</b><span class=mut>${esc(U().name)} · ${ROLES[role()]}</span><span><select style="width:auto" onchange="setLang(this.value)"><option value=en>English</option><option value=hi ${S.lang=="hi"?"selected":""}>हिंदी</option><option value=mr ${S.lang=="mr"?"selected":""}>मराठी</option></select> <button class=s onclick="logout()">${t("out")}</button></span></div><nav>${n.map(k=>`<button class="${view==k?"on":""}" onclick="go('${k}')">${t(k)}${k=="notes"&&warns().filter(w=>!S.read[w.id]).length?" ("+warns().filter(w=>!S.read[w.id]).length+")":""}</button>`).join("")}</nav>${c}`}
+function dash(){const P=mine(),L=P.map(p=>({p,a:latest(p.id)})).filter(x=>x.a),c=x=>L.filter(y=>cls(y.a.health)[0]==x).length,avg=L.length?Math.round(L.reduce((s,y)=>s+y.a.health,0)/L.length):"–";
+const pr=S.proj.filter(x=>P.some(p=>p.id==x.plot)),W=warns().filter(w=>w.p);
+const card=(a,b,col)=>`<div class=card><div class=mut>${a}</div><div class=big style="color:${col||"inherit"}">${b}</div></div>`;
+let h=`<h2>${t("dash")}</h2><div class=g>${card("Registered plots",P.length)}${card("Total analyses",P.reduce((s,p)=>s+ans(p.id).length,0))}${card("🟢 Healthy",c("Healthy"),"var(--g)")}${card("🟡 Moderately degraded",c("Moderately Degraded"),"var(--y)")}${card("🔴 Highly degraded",c("Highly Degraded"),"var(--r)")}${card("Average land health",avg)}${card("Active restoration",pr.filter(x=>!x.done).length,"var(--b)")}${card("Completed restoration",pr.filter(x=>x.done).length,"var(--p)")}${card("Early warnings",W.length,W.length?"var(--r)":"")}</div>`;
+if(W.length)h+=W.map(w=>`<div class="card warn"><b>${w.t}</b><br>${w.m}</div>`).join("");
+const hr=L.filter(y=>y.a.health<40);h+=`<div class=card><h3>High-risk areas</h3>${hr.length?hr.map(y=>`<div>🔴 ${pn(y.p)} — ${y.p.district}, health ${y.a.health}</div>`).join(""):"<span class=mut>None</span>"}</div>`;
+if(role()=="gov")h+=`<div class=card><h3>Regional project status</h3><table><tr><th>Total projects<th>Active<th>Completed<th>Delayed</tr><tr><td>${pr.length}<td>${pr.filter(x=>!x.done).length}<td>${pr.filter(x=>x.done).length}<td>0</tr></table></div>`;
+return h+`<div class=card><h3>Plots</h3><div class=sc><table><tr><th>Land ID<th>Location<th>Status<th>Health</tr>${P.map(p=>{const a=latest(p.id),s=pst(p.id);return`<tr><td>${pn(p)}<td>${p.district}<td><span class=tag style="background:${s[1]}">${s[0]}</span><td>${a?a.health:"–"}</tr>`}).join("")}</table></div></div>`}
+function land(){return`<h2>${t("land")}</h2><div class=card><h3>Register land / plot</h3><div class=g2><div><label>Plot name</label><input id=pnm><label>Village / town + District</label><input id=pds placeholder="e.g. Pune"><label>State</label><input id=pst value="Maharashtra"></div><div><label>Area</label><input id=par placeholder="e.g. 2 ha"><label>Land type</label><select id=pty><option>Agricultural<option>Non-agricultural</select><label>Crop (if any)</label><input id=pcr><label>Coordinates (optional)</label><input id=plt placeholder="lat" style="width:48%"> <input id=pln placeholder="lng" style="width:48%"></div></div><br><button onclick="addPlot()">Create plot & Land ID</button></div>
+<div class=card><h3>My plots</h3>${mine().map(p=>`<div>📍 <b>${p.id}</b> — ${esc(p.name)}, ${esc(p.district)}, ${esc(p.state)} · ${esc(p.area)} · ${p.type}</div>`).join("")||"<span class=mut>No plots yet.</span>"}</div>`}
+function analyze(){const P=mine();if(!P.length)return`<h2>${t("analyze")}</h2><div class=card>Register a plot first.</div>`;
+return`<h2>${t("analyze")}</h2><div class=card><h3>Step 1 — Plot & image</h3><label>Land / plot</label><select id=ap>${P.map(p=>`<option value="${p.id}">${p.id} — ${esc(p.name)}</option>`).join("")}</select><label>Land image (click or drag & drop)</label><input type=file id=af accept="image/*" onchange="prev(this.files[0])" ondragover="event.preventDefault()"><div id=pv style="margin-top:8px"></div></div>
+<div class=card><h3>🧪 Soil analysis (measured values, optional)</h3><div class=g>${SP.map(s=>`<div><label>${s[1]}</label><input id="s_${s[0]}" type=number step=any></div>`).join("")}</div><label>Soil lab report (PDF / image, kept as reference)</label><input type=file id=sr accept="image/*,.pdf"><p class=mut>Leave blank if not measured. Sensor-feed integration is planned for a future version.</p></div>
+<button onclick="runA()">Analyze Image</button><div id=res>${last?report(last):""}</div>`}
+function prev(f){if(!f)return;const r=new FileReader();r.onload=()=>{pending=r.result;$("#pv").innerHTML=`<img class=pv src="${r.result}"> <button class=s onclick="pending=null;$('#pv').innerHTML='';$('#af').value=''">Remove</button>`};r.readAsDataURL(f)}
+function runA(){if(!pending)return alert("Please upload a land image first.");const im=new Image();im.onload=()=>{const v=visual(im),o={};SP.forEach(s=>o[s[0]]=$("#s_"+s[0]).value);const se=soilEval(o);const hasSoil=se.score!=null;
+const vh=100-v.deg;let health=hasSoil?Math.round(.6*vh+.4*se.score):vh;const id=$("#ap").value;
+const rec={plot:id,ts:Date.now(),health,deg:100-health,cls:cls(health)[0],soil:hasSoil?o:null,soilScore:se.score,img:v.thumb,ind:v.ind,visH:vh};S.an.push(rec);save();last=rec;sel=id;$("#res").innerHTML=report(rec);$("#res").scrollIntoView({behavior:"smooth"})};im.src=pending}
+function report(a){const p=S.plots.find(x=>x.id==a.plot),c=cls(a.health),se=a.soil?soilEval(a.soil):null,prev=ans(a.plot).filter(x=>x.ts<a.ts).pop();
+const risk=a.health<40?["🔴 HIGH","var(--r)"]:a.health<70?["🟡 MEDIUM","var(--y)"]:["🟢 LOW","var(--g)"];
+const rec={Healthy:["Maintain vegetation cover","Continue sustainable land-management practices","Monitor periodically"],"Moderately Degraded":["Increase vegetation / ground cover","Consider soil-conservation practices","Monitor soil moisture and review nutrient status","Schedule another assessment"],"Highly Degraded":["Conduct further field assessment","Consider suitable restoration measures","Investigate erosion, moisture and nutrient problems","Consult an agriculture / soil expert","Monitor the land closely"]}[a.cls];
+return`<div class=card id=rep><h3>📋 Land Health Report — ${p?pn(p):a.plot}</h3><p class=mut>${p?esc(p.district)+", "+esc(p.state)+" · ":""}${new Date(a.ts).toLocaleString()}</p>
+${a.img?`<img class=pv src="${a.img}" style="width:240px">`:""}<div class=g><div class=card><div class=mut>AI visual assessment</div><b style="color:${c[1]}">${c[2]} ${c[0]}</b><div class=mut>Model confidence: not available — prototype colour-based heuristic, no trained model attached</div></div><div class=card><div class=mut>LAND HEALTH SCORE</div><div class=big>${a.health} / 100</div>${bar(a.health,c[1])}</div><div class=card><div class=mut>Estimated degradation (prototype indicator)</div><div class=big>${a.deg}%</div>${bar(a.deg,"var(--r)")}</div><div class=card><div class=mut>SOIL HEALTH SCORE (measured)</div><div class=big>${a.soilScore!=null?a.soilScore+" / 100":"–"}</div>${a.soilScore!=null?bar(a.soilScore,"var(--g)"):"<span class=mut>Insufficient soil-test data</span>"}</div></div>
+<div class=card><b>Overall risk:</b> <span style="color:${risk[1]}">${risk[0]}</span>${prev?`<br>Change since previous assessment: <b>${a.health-prev.health>0?"+":""}${a.health-prev.health} points</b>`:""}</div>
+${a.ind?`<div class=card><h3>Why did the AI give this result?</h3>${a.ind.map(i=>`<div>${i[0]} — <b>${i[1]}</b></div>`).join("")}<p class=mut>Image-based assessment provides a preliminary visual assessment. Scientific soil-health evaluation requires measured soil-test data. AI-estimated indicators are not measurements.</p></div>`:""}
+<div class=card><h3>Soil parameters</h3>${SP.map(s=>{const r=se&&se.r[s[0]];return`<div>${s[1]}: ${r?`<b>${a.soil[s[0]]}</b> — ${r[0]}`:`<span class=mut>Insufficient soil-test data for this parameter.</span>`}</div>`}).join("")}</div>
+<div class=card><h3>💡 Recommendations</h3><ul>${rec.map(r=>`<li>${r}</li>`).join("")}</ul><p class=mut>General guidance only — not a replacement for professional agricultural advice.</p></div><button class=noprint onclick="window.print()">Export PDF / Print</button></div>`}
+function history(){const P=mine();if(!sel||!P.some(p=>p.id==sel))sel=P[0]?.id;const A=ans(sel);const pts=A.map(a=>[new Date(a.ts).toLocaleDateString(LC(),{month:"short",year:"2-digit"}),a.health]);
+const i1=Math.min(cmp[0],A.length-1),i2=Math.min(cmp[1]||A.length-1,A.length-1),a1=A[i1],a2=A[i2];
+return`<h2>${t("history")}</h2><select onchange="sel=this.value;render()">${P.map(p=>`<option value="${p.id}" ${p.id==sel?"selected":""}>${pn(p)}</option>`).join("")}</select>
+<div class=g2><div class=card><h3>Land health over time</h3>${chart(pts)}</div><div class=card><h3>Degradation % over time</h3>${chart(A.map((a,i)=>[pts[i][0],a.deg]),"#d64545")}</div></div>
+<div class=g2><div class=card><h3>Soil health over time</h3>${chart(A.filter(a=>a.soilScore!=null).map(a=>[fd(a.ts).slice(3),a.soilScore]),"#8b5cd6")}</div>${(()=>{const mo=A.filter(a=>a.soil&&a.soil.mo!=="").map(a=>[fd(a.ts).slice(3),+a.soil.mo]);return`<div class=card><h3>Moisture (%)</h3>${chart(mo,"#3b82d6")}</div>`})()}</div>
+${A.length>1&&Math.max(...A.slice(0,-1).map(a=>a.health))-A[A.length-1].health>=15?`<div class="card warn"><b>⚠️ EARLY WARNING</b><br>Land health is declining rapidly (${Math.max(...A.slice(0,-1).map(a=>a.health))} → ${A[A.length-1].health}). Schedule a new soil assessment and consult an agriculture/soil expert.</div>`:""}
+<div class=card><h3>Analysis history</h3><div class=sc><table><tr><th><th>Date<th>Location<th>Condition<th>Health<th>Deg %<th>Soil<th></tr>${A.map((a,i)=>{const p=S.plots.find(x=>x.id==a.plot);return`<tr><td>${a.img?`<img class=th src="${a.img}">`:""}<td>${fd(a.ts)}<td>${p.district}<td>${cls(a.health)[2]} ${a.cls}<td>${a.health}<td>${a.deg}%<td>${a.soilScore??"–"}<td><button class=s onclick="last=S.an.find(x=>x.ts==${a.ts}&&x.plot=='${a.plot}');go('analyze')">Open</button></tr>`}).join("")}</table></div></div>
+${A.length>1?`<div class=card><h3>Before & after</h3><label>From</label><select onchange="cmp[0]=+this.value;render()">${A.map((a,i)=>`<option value=${i} ${i==i1?"selected":""}>${fd(a.ts)}</option>`).join("")}</select><label>To</label><select onchange="cmp[1]=+this.value;render()">${A.map((a,i)=>`<option value=${i} ${i==i2?"selected":""}>${fd(a.ts)}</option>`).join("")}</select><div class=g style="margin-top:10px">${[a1,a2].map(a=>`<div class=card style="text-align:center">${a.img?`<img class=pv src="${a.img}"><br>`:""}${cls(a.health)[2]} ${a.cls}<br>Health ${a.health}<br><span class=mut>${fd(a.ts)}</span></div>`).join("")}</div><b>Change: ${a2.health-a1.health>0?"+":""}${a2.health-a1.health} points</b></div>`:""}`}
+function mapv(){const P=mine().filter(p=>p.lat);const la=P.map(p=>+p.lat),lo=P.map(p=>+p.lng),a=Math.min(...la)-.4,b=Math.max(...la)+.4,c=Math.min(...lo)-.4,d=Math.max(...lo)+.4;
+const sp=sel&&S.plots.find(p=>p.id==sel&&P.includes(p));const x=p=>30+(p.lng-c)/(d-c)*540,y=p=>270-(p.lat-a)/(b-a)*240;
+return`<h2>${t("map")}</h2><div class=card><svg viewBox="0 0 600 300" style="width:100%;background:var(--bg);border-radius:8px"><text x=10 y=18 font-size=11 fill="#888">Schematic plot map (lat/lng scaled; no base map in prototype)</text>${P.map(p=>`<circle cx=${x(p)} cy=${y(p)} r=${sel==p.id?13:9} fill="${pst(p.id)[1]}" stroke="#fff" stroke-width=2 style="cursor:pointer" onclick="sel='${p.id}';render()"/><text x=${x(p)+12} y=${y(p)+4} font-size=11 fill="#888">${esc(p.district)}</text>`).join("")}</svg>
+<div class=mut>🟢 Healthy · 🟡 Moderate · 🔴 Highly degraded · 🔵 Restoration in progress · 🟣 Restoration completed</div></div>
+${sp?(()=>{const A=ans(sp.id),l=A[A.length-1],pv=A[A.length-2];return`<div class=card><h3>${pn(sp)}</h3>Location: ${sp.district}, ${sp.state}<br>Current health: <b>${l.health}</b> · Previous: ${pv?pv.health:"–"} · Trend: ${pv?(l.health<pv.health?"↓ declining":l.health>pv.health?"↑ improving":"→ stable"):"–"}<br>Soil health: ${l.soilScore??"–"}<br>Status: ${pst(sp.id)[2]} ${pst(sp.id)[0]}<br>Last analysis: ${fd(l.ts)}<br>Owner: ${esc(own(sp))}</div>`})():`<div class=card class=mut>Click a plot marker for details.</div>`}`}
+function projects(){const P=mine();const pr=S.proj.filter(x=>P.some(p=>p.id==x.plot));const can=["farmer","officer","org"].includes(role());const first=P.filter(p=>!S.proj.some(x=>x.plot==p.id));
+return`<h2>${t("projects")}</h2>${can&&first.length?`<div class=card><h3>New restoration project</h3><select id=np>${first.map(p=>`<option value=${p.id}>${pn(p)}</option>`).join("")}</select> <button onclick="newProj()">Create project</button></div>`:""}${pr.map((x,i)=>`<div class=card><h3>${x.plot} — ${pst(x.plot)[2]} ${pst(x.plot)[0]}</h3><div>Current health: <b>${latest(x.plot)?.health??"–"}</b></div><b>Restoration progress: ${x.progress}%</b>${bar(x.progress,"var(--b)")}<h4>Milestones</h4>${x.ms.map((m,j)=>`<div>${["⬜ Pending","🔄 In progress","✅ Completed"][m[1]]} — ${m[0]} ${can&&!x.done?`<button class=s onclick="adv(${S.proj.indexOf(x)},${j})">advance</button>`:""}</div>`).join("")}<h4>Timeline</h4>${x.tl.map(t=>`<div><b>${t[0]}</b> → ${t[1]}</div>`).join("")}</div>`).join("")||"<div class=card>No projects.</div>"}`}
+const EXR={farmer:[["Dr. A. Kulkarni","Soil Science","Mahatma Phule Agri University","Rahuri"],["Dr. S. Deshmukh","Crop & Land Management","ICAR Regional Station","Pune"],["Smt. P. Joshi","Agronomy & Water","Krishi Vigyan Kendra","Baramati"],["Dr. V. More","Organic Farming","State Agriculture Dept.","Satara"]],
+officer:[["Prof. R. Iyer","Remote Sensing & GIS","IIT Bombay","Mumbai"],["Dr. M. Patil","Water Management","WALMI","Aurangabad"],["Dr. K. Sharma","Soil Survey","NBSS&LUP","Nagpur"],["Dr. T. Nair","Land Restoration","ICAR-CSWCRTI","Dehradun"]],
+org:[["Dr. N. Rao","Ecology","Env. Research Institute","Nagpur"],["Dr. L. Fernandes","Watershed Restoration","WOTR","Pune"],["Dr. H. Singh","Biodiversity","WII","Dehradun"],["Ms. D. Menon","Carbon & Land Use","TERI","Delhi"]],
+researcher:[["Prof. S. Banerjee","Soil Chemistry","IISER Pune","Pune"],["Dr. J. George","Remote Sensing Indices","ISRO-NRSC","Hyderabad"],["Prof. A. Khan","Statistics & Datasets","IIT Kanpur","Kanpur"],["Dr. P. Gupta","Land Degradation Research","ICRISAT","Hyderabad"]],
+gov:[["Dr. B. Chavan","Policy & Land Use","State Planning Board","Mumbai"],["Shri R. Pawar","Project Audit","Dept. of Agriculture","Pune"],["Dr. U. Mehta","Drought & Disaster","NIDM","Delhi"],["Dr. C. Reddy","GIS Governance","NRSC","Hyderabad"]],
+expert:[["Dr. E. Thomas","Peer Review","CSSRI","Karnal"],["Prof. G. Das","Soil Microbiology","IARI","Delhi"],["Dr. Y. Kale","Case Consultation","MPKV","Rahuri"]],
+admin:[["Security Lead","Data Security","IT Cell","Pune"],["Compliance Lead","Verification Desk","Admin Office","Mumbai"]]};
+const BOT={farmer:["KisanMitra 🌾",["I can guide you on your plots, soil values and recovery steps. Ask about moisture, pH, erosion or warnings.","मैं आपके प्लॉट, मिट्टी के मान और सुधार के कदमों में मदद कर सकता हूँ। नमी, pH, कटाव या चेतावनी के बारे में पूछें।","मी तुमचे प्लॉट, मातीची मूल्ये व सुधारणा उपायांत मदत करू शकतो. ओलावा, pH, धूप किंवा इशाऱ्याबद्दल विचारा."]],
+officer:["FieldOps Assistant 🧭",["I can help you prioritise high-risk farms, plan field visits and prepare reports.","मैं उच्च जोखिम वाले खेतों की प्राथमिकता, क्षेत्र दौरे और रिपोर्ट तैयार करने में मदद करता हूँ।","मी उच्च जोखमीच्या शेतांचे प्राधान्य, क्षेत्र भेटी व अहवाल तयार करण्यात मदत करतो."]],
+org:["EcoTrack Assistant 🌿",["I can help track restoration milestones, compare project progress and draft environmental reports.","मैं पुनर्स्थापन माइलस्टोन, परियोजना प्रगति की तुलना और पर्यावरण रिपोर्ट में मदद करता हूँ।","मी पुनर्स्थापना टप्पे, प्रकल्प प्रगतीची तुलना व पर्यावरण अहवालात मदत करतो."]],
+researcher:["ResearchBuddy 🔬",["I can help you read trends, compare anonymised plot histories and plan analysis.","मैं रुझान पढ़ने, गोपनीय प्लॉट इतिहास की तुलना और विश्लेषण की योजना में मदद करता हूँ।","मी कल वाचणे, अनामित प्लॉट इतिहासांची तुलना व विश्लेषण नियोजनात मदत करतो."]],
+gov:["PolicyDesk Assistant 🏛️",["I can summarise regional risk, project delays and early warnings for authorised review.","मैं अधिकृत समीक्षा के लिए क्षेत्रीय जोखिम, परियोजना देरी और पूर्व चेतावनियों का सार देता हूँ।","मी अधिकृत आढाव्यासाठी प्रादेशिक जोखीम, प्रकल्प विलंब व पूर्व इशाऱ्यांचा सारांश देतो."]],
+expert:["CaseDesk Assistant 🧪",["I can help you organise pending consultation requests and review attached soil reports.","मैं लंबित परामर्श अनुरोध और संलग्न मृदा रिपोर्ट की समीक्षा में मदद करता हूँ।","मी प्रलंबित सल्ला विनंत्या व जोडलेल्या माती अहवालांच्या आढाव्यात मदत करतो."]],
+admin:["AdminGuard 🛡️",["I can help with user verification, role permissions and data-security checks.","मैं उपयोगकर्ता सत्यापन, भूमिका अनुमतियों और डेटा सुरक्षा जाँच में मदद करता हूँ।","मी वापरकर्ता पडताळणी, भूमिका परवानग्या व डेटा सुरक्षा तपासणीत मदत करतो."]]};
+const TOP=[["moist|water|dry|नमी|ओलावा",["Low moisture: add mulch or ground cover, review irrigation timing and re-measure moisture in 2 weeks.","कम नमी: मल्चिंग या ग्राउंड कवर लगाएँ, सिंचाई समय जाँचें और 2 सप्ताह में फिर मापें।","कमी ओलावा: आच्छादन वापरा, सिंचन वेळ तपासा व 2 आठवड्यांत पुन्हा मोजा."]],
+["\\bph\\b|nutri|nitrogen|soil|मिट्टी|माती",["Use measured soil-test values (pH, N, P, K, organic carbon) for scoring; a photo alone cannot measure soil chemistry.","स्कोर के लिए मापे गए मृदा-परीक्षण मान (pH, N, P, K, कार्बन) उपयोग करें; केवल फोटो से मिट्टी की रसायनिकी नहीं मापी जा सकती।","स्कोअरसाठी मोजलेली माती-चाचणी मूल्ये (pH, N, P, K, कर्ब) वापरा; फक्त फोटोने मातीचे रसायन मोजता येत नाही."]],
+["erosion|vegetat|cover|कटाव|धूप",["Erosion signs: increase vegetation cover, use contour bunds or cover crops, and ask an expert to inspect the slope.","कटाव: वनस्पति आवरण बढ़ाएँ, कंटूर बंड या कवर फसल अपनाएँ और विशेषज्ञ से ढलान जँचवाएँ।","धूप: वनस्पती आवरण वाढवा, समोच्च बांध/आच्छादन पिके वापरा व तज्ज्ञांकडून उतार तपासा."]],
+["warn|declin|risk|चेतावनी|इशारा",["For a declining score, run a fresh soil test and consult an expert; compare the before/after view in History.","स्कोर गिरने पर नया मृदा परीक्षण करें और विशेषज्ञ से सलाह लें; इतिहास में पहले/बाद देखें।","गुण घसरल्यास नवी माती चाचणी करा व तज्ज्ञांचा सल्ला घ्या; इतिहासात आधी/नंतर पहा."]],
+["report|pdf|अहवाल|रिपोर्ट",["Open any saved analysis from History and use Export PDF / Print to save the report.","इतिहास से कोई विश्लेषण खोलें और रिपोर्ट सहेजने के लिए PDF निर्यात / प्रिंट उपयोग करें।","इतिहासातून विश्लेषण उघडा व अहवाल जतन करण्यासाठी PDF निर्यात / प्रिंट वापरा."]]];
+const GR=["Hello! Ask me about moisture, soil, erosion, warnings or reports.","नमस्ते! नमी, मिट्टी, कटाव, चेतावनी या रिपोर्ट के बारे में पूछें।","नमस्कार! ओलावा, माती, धूप, इशारे किंवा अहवालाबद्दल विचारा."];
+const EXD=["Thank you. Please share your Land ID and latest report so I can advise.","धन्यवाद। सलाह के लिए कृपया अपना भूमि आईडी और नवीनतम रिपोर्ट साझा करें।","धन्यवाद. सल्ल्यासाठी कृपया तुमचा जमीन आयडी व ताजा अहवाल पाठवा."];
+const LC=()=>({en:"en-GB",hi:"hi-IN",mr:"mr-IN"}[S.lang]||"en-GB"),LI=()=>({en:0,hi:1,mr:2}[S.lang]||0);
+function reply(v,c){const x=v.toLowerCase(),m=TOP.find(a=>new RegExp(a[0]).test(x));return c.with+": "+(m?m[1][LI()]:c.bot?BOT[role()][1][LI()]:EXD[LI()])}
+function experts(){const E=EXR[role()],b=BOT[role()];let c=S.chat.filter(x=>x.role==role());
+if(!c.some(x=>x.bot)){S.chat.push({id:Date.now(),with:b[0],role:role(),bot:1,type:"AI assistant",msgs:[{from:"bot",text:b[0]+": "+GR[LI()],ts:Date.now()}]});save();c=S.chat.filter(x=>x.role==role())}
+return`<h2>${t("experts")}</h2><div class=g2><div class=card><h3>Expert & researcher directory</h3>${E.map((e,i)=>`<div style="padding:6px 0;border-bottom:1px solid var(--bd)"><b>${e[0]}</b> <span class=tag style="background:var(--g)">Verified</span><br><span class=mut>${e[1]} · ${e[2]} · ${e[3]}</span><br><button class=s onclick="consult(${i})">Request consultation</button></div>`).join("")}</div>
+<div class=card><h3>💬 Secure chat</h3>${c.map(c=>`<div class=card><b>${esc(c.with)}</b> <span class=mut>(${esc(c.type)})</span>${c.msgs.map(m=>`<div class="msg ${m.from=="me"?"me":"ot"}">${esc(m.text)}<div style="font-size:11px;opacity:.7">${new Date(m.ts).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}</div></div>`).join("")}<input id=cm${c.id} placeholder="Type message…" onkeydown="if(event.key=='Enter')send(${c.id})"> <button onclick="send(${c.id})">Send</button></div>`).join("")}</div></div>`}
+function ans2(c,v){setTimeout(()=>{c.msgs.push({from:"bot",text:reply(v,c),ts:Date.now()});save();if(view=="experts"&&U())render()},700)}
+function consult(i){const e=EXR[role()][i],id=Date.now(),c={id,with:e[0],role:role(),type:e[1],msgs:[{from:"me",text:{en:"Hello, I would like guidance on land health.",hi:"नमस्ते, मुझे भूमि स्वास्थ्य पर मार्गदर्शन चाहिए।",mr:"नमस्कार, मला जमीन आरोग्यावर मार्गदर्शन हवे आहे."}[S.lang],ts:id}]};S.chat.push(c);save();render();ans2(c,"")}
+function send(id){const c=S.chat.find(x=>x.id==id),v=$("#cm"+id).value.trim();if(!v)return;c.msgs.push({from:"me",text:v,ts:Date.now()});save();render();ans2(c,v)}
+function notes(){const W=warns();return`<h2>${t("notes")}</h2>${W.map(w=>`<div class="card ${S.read[w.id]?"":"warn"}"><b>${w.t}</b><br>${w.m}<br>${S.read[w.id]?"<span class=mut>Read</span>":`<button class=s onclick="S.read['${w.id}']=1;save();render()">Mark as read</button>`}</div>`).join("")||"<div class=card>No notifications.</div>"}`}
+const V={dash,land,analyze,history,map:mapv,projects,experts,notes};
+const D=`AI-Based Land Health & Degradation Monitoring System|एआई-आधारित भूमि स्वास्थ्य व क्षरण निगरानी प्रणाली|एआय-आधारित जमीन आरोग्य व ऱ्हास निरीक्षण प्रणाली
+Land Health Monitor|भूमि स्वास्थ्य मॉनिटर|जमीन आरोग्य मॉनिटर
+What is land degradation?|भूमि क्षरण क्या है?|जमिनीचा ऱ्हास म्हणजे काय?
+Decline in land's ability to support vegetation and crops, caused by erosion, overgrazing, deforestation, poor irrigation, salinity and drought. It leads to soil fertility loss, vegetation loss, moisture stress and eventually desertification.|कटाव, अति-चराई, वनों की कटाई, खराब सिंचाई, लवणता और सूखे से भूमि की वनस्पति व फसल सहारने की क्षमता घटती है। इससे उर्वरता व वनस्पति की हानि, नमी तनाव और अंततः मरुस्थलीकरण होता है।|धूप, अतिचराई, जंगलतोड, चुकीचे सिंचन, क्षारता व दुष्काळामुळे जमिनीची वनस्पती व पिके टिकवण्याची क्षमता घटते. यामुळे सुपीकता व वनस्पती हानी, ओलावा ताण व अखेर वाळवंटीकरण होते.
+Why early detection matters|शीघ्र पहचान क्यों ज़रूरी है|लवकर ओळख का महत्त्वाची आहे
+Farmers, agriculture officers, NGOs, researchers and authorities can act before damage becomes costly to reverse — by tracking change over time instead of reacting late.|किसान, कृषि अधिकारी, एनजीओ, शोधकर्ता और प्राधिकरण नुकसान महँगा होने से पहले कार्रवाई कर सकते हैं — देर से प्रतिक्रिया देने के बजाय समय के साथ बदलाव ट्रैक करके।|शेतकरी, कृषी अधिकारी, एनजीओ, संशोधक व प्राधिकरणे नुकसान महागडे होण्यापूर्वी कृती करू शकतात — उशिरा प्रतिक्रिया देण्याऐवजी कालानुसार बदल मागोवा घेऊन.
+How it works|यह कैसे काम करता है|हे कसे काम करते
+Upload / Enter Data|डेटा अपलोड / दर्ज करें|डेटा अपलोड / नोंदवा
+AI & Soil Assessment|एआई व मृदा आकलन|एआय व माती मूल्यांकन
+Land Health Score|भूमि स्वास्थ्य स्कोर|जमीन आरोग्य गुण
+Classification|वर्गीकरण|वर्गीकरण
+Explanation|व्याख्या|स्पष्टीकरण
+Recommendation|सुझाव|शिफारस
+Monitoring|निगरानी|निरीक्षण
+Early Warning|पूर्व चेतावनी|पूर्व इशारा
+Restoration Tracking|पुनर्स्थापन ट्रैकिंग|पुनर्स्थापना मागोवा
+Select your role|अपनी भूमिका चुनें|तुमची भूमिका निवडा
+Your name|आपका नाम|तुमचे नाव
+Prototype: accounts are stored only in this browser (no server). Production use needs real authentication and verification of government/expert roles.|प्रोटोटाइप: खाते केवल इसी ब्राउज़र में सहेजे जाते हैं। वास्तविक उपयोग के लिए असली प्रमाणीकरण व सत्यापन ज़रूरी है।|प्रोटोटाइप: खाती फक्त याच ब्राउझरमध्ये साठवली जातात. प्रत्यक्ष वापरासाठी खरी ओळख पडताळणी आवश्यक आहे.
+Continue|आगे बढ़ें|पुढे जा
+Name|नाम|नाव
+Agriculture Officer|कृषि अधिकारी|कृषी अधिकारी
+Environmental Organization|पर्यावरण संगठन|पर्यावरण संस्था
+Researcher / Student|शोधकर्ता / छात्र|संशोधक / विद्यार्थी
+Government Authority|सरकारी प्राधिकरण|शासकीय प्राधिकरण
+Soil / Environmental Expert|मृदा / पर्यावरण विशेषज्ञ|माती / पर्यावरण तज्ज्ञ
+Farmer|किसान|शेतकरी
+Admin|एडमिन|प्रशासक
+Registered plots|पंजीकृत प्लॉट|नोंदणीकृत प्लॉट
+Total analyses|कुल विश्लेषण|एकूण विश्लेषणे
+Moderately degraded|मध्यम क्षरित|मध्यम ऱ्हास
+Moderately Degraded|मध्यम क्षरित|मध्यम ऱ्हास
+Highly degraded|अत्यधिक क्षरित|अत्यंत ऱ्हास
+Highly Degraded|अत्यधिक क्षरित|अत्यंत ऱ्हास
+Healthy|स्वस्थ|निरोगी
+Average land health|औसत भूमि स्वास्थ्य|सरासरी जमीन आरोग्य
+Active restoration|सक्रिय पुनर्स्थापन|सक्रिय पुनर्स्थापना
+Completed restoration|पूर्ण पुनर्स्थापन|पूर्ण पुनर्स्थापना
+Early warnings|पूर्व चेतावनियाँ|पूर्व इशारे
+High-risk areas|उच्च जोखिम क्षेत्र|उच्च जोखीम क्षेत्रे
+None|कोई नहीं|काहीही नाही
+Plots|प्लॉट|प्लॉट
+Land ID|भूमि आईडी|जमीन आयडी
+Location|स्थान|ठिकाण
+Status|स्थिति|स्थिती
+Health|स्वास्थ्य|आरोग्य
+Condition|अवस्था|स्थिती
+Date|तिथि|दिनांक
+Deg %|क्षरण %|ऱ्हास %
+Soil|मृदा|माती
+Regional project status|क्षेत्रीय परियोजना स्थिति|प्रादेशिक प्रकल्प स्थिती
+Total projects|कुल परियोजनाएँ|एकूण प्रकल्प
+Active|सक्रिय|सक्रिय
+Completed|पूर्ण|पूर्ण
+Delayed|विलंबित|विलंबित
+Restoration in Progress|पुनर्स्थापन जारी|पुनर्स्थापना सुरू
+Restoration Completed|पुनर्स्थापन पूर्ण|पुनर्स्थापना पूर्ण
+No data|डेटा नहीं|डेटा नाही
+Register land / plot|भूमि / प्लॉट पंजीकृत करें|जमीन / प्लॉट नोंदवा
+Plot name|प्लॉट का नाम|प्लॉटचे नाव
+Village / town + District|गाँव / शहर + ज़िला|गाव / शहर + जिल्हा
+State|राज्य|राज्य
+Area|क्षेत्रफल|क्षेत्रफळ
+Land type|भूमि प्रकार|जमिनीचा प्रकार
+Crop (if any)|फसल (यदि हो)|पीक (असल्यास)
+Coordinates (optional)|निर्देशांक (वैकल्पिक)|निर्देशांक (ऐच्छिक)
+Create plot & Land ID|प्लॉट व भूमि आईडी बनाएँ|प्लॉट व जमीन आयडी तयार करा
+My plots|मेरे प्लॉट|माझे प्लॉट
+No plots yet.|अभी कोई प्लॉट नहीं।|अजून प्लॉट नाहीत.
+Register a plot first.|पहले प्लॉट पंजीकृत करें।|आधी प्लॉट नोंदवा.
+Step 1 — Plot & image|चरण 1 — प्लॉट व चित्र|पायरी 1 — प्लॉट व प्रतिमा
+Land / plot|भूमि / प्लॉट|जमीन / प्लॉट
+Land image (click or drag & drop)|भूमि की तस्वीर (क्लिक या ड्रैग-ड्रॉप)|जमिनीची प्रतिमा (क्लिक किंवा ड्रॅग-ड्रॉप)
+Remove|हटाएँ|काढा
+Soil analysis (measured values, optional)|मृदा विश्लेषण (मापे गए मान, वैकल्पिक)|माती विश्लेषण (मोजलेली मूल्ये, ऐच्छिक)
+Nitrogen|नाइट्रोजन|नायट्रोजन
+Phosphorus|फॉस्फोरस|फॉस्फरस
+Potassium|पोटैशियम|पोटॅशियम
+Moisture|नमी|ओलावा
+Organic carbon|जैविक कार्बन|सेंद्रिय कर्ब
+Soil lab report (PDF / image, kept as reference)|मृदा प्रयोगशाला रिपोर्ट (PDF / चित्र)|माती प्रयोगशाळा अहवाल (PDF / प्रतिमा)
+Leave blank if not measured. Sensor-feed integration is planned for a future version.|जो मापा नहीं गया उसे खाली छोड़ें। सेंसर एकीकरण भविष्य में आएगा।|मोजले नसल्यास रिकामे सोडा. सेन्सर एकत्रीकरण भविष्यात येईल.
+Analyze Image|चित्र का विश्लेषण करें|प्रतिमेचे विश्लेषण करा
+Land Health Report|भूमि स्वास्थ्य रिपोर्ट|जमीन आरोग्य अहवाल
+AI visual assessment|एआई दृश्य आकलन|एआय दृश्य मूल्यांकन
+Model confidence: not available — prototype colour-based heuristic, no trained model attached|मॉडल विश्वास: उपलब्ध नहीं — प्रोटोटाइप रंग-आधारित अनुमान|मॉडेल विश्वास: उपलब्ध नाही — प्रोटोटाइप रंग-आधारित अंदाज
+LAND HEALTH SCORE|भूमि स्वास्थ्य स्कोर|जमीन आरोग्य गुण
+Estimated degradation (prototype indicator)|अनुमानित क्षरण (प्रोटोटाइप संकेतक)|अंदाजित ऱ्हास (प्रोटोटाइप निर्देशक)
+SOIL HEALTH SCORE (measured)|मृदा स्वास्थ्य स्कोर (मापित)|माती आरोग्य गुण (मोजलेले)
+Insufficient soil-test data for this parameter.|इस पैरामीटर के लिए मृदा-परीक्षण डेटा अपर्याप्त।|या घटकासाठी माती-चाचणी डेटा अपुरा.
+Insufficient soil-test data|मृदा-परीक्षण डेटा अपर्याप्त|माती-चाचणी डेटा अपुरा
+Overall risk:|कुल जोखिम:|एकूण जोखीम:
+Change since previous assessment:|पिछले आकलन से बदलाव:|मागील मूल्यांकनापासून बदल:
+points|अंक|गुण
+Why did the AI give this result?|एआई ने यह परिणाम क्यों दिया?|एआयने हा निकाल का दिला?
+Vegetation coverage|वनस्पति आवरण|वनस्पती आवरण
+Exposed soil|खुली मिट्टी|उघडी माती
+Visible dryness|दिखाई देती शुष्कता|दिसणारा कोरडेपणा
+Visible erosion signs|दिखाई देते कटाव संकेत|दिसणारी धूप चिन्हे
+High|अधिक|जास्त
+Moderate|मध्यम|मध्यम
+Low|कम|कमी
+Not detected|नहीं मिला|आढळले नाही
+Possible|संभव|शक्य
+Suitable|उपयुक्त|योग्य
+High/Adequate|अधिक/पर्याप्त|जास्त/पुरेसे
+Salinity risk|लवणता जोखिम|क्षारता जोखीम
+Image-based assessment provides a preliminary visual assessment. Scientific soil-health evaluation requires measured soil-test data. AI-estimated indicators are not measurements.|छवि-आधारित आकलन केवल प्रारंभिक दृश्य आकलन है। वैज्ञानिक मृदा-स्वास्थ्य मूल्यांकन के लिए मापा गया मृदा-परीक्षण डेटा चाहिए। एआई-अनुमानित संकेतक माप नहीं हैं।|प्रतिमा-आधारित मूल्यांकन हे प्राथमिक दृश्य मूल्यांकन आहे. वैज्ञानिक माती-आरोग्य मूल्यमापनासाठी मोजलेला चाचणी डेटा आवश्यक आहे. एआय-अंदाजित निर्देशक मोजमाप नाहीत.
+Soil parameters|मृदा पैरामीटर|माती घटक
+Recommendations|सुझाव|शिफारसी
+Maintain vegetation cover|वनस्पति आवरण बनाए रखें|वनस्पती आवरण टिकवा
+Continue sustainable land-management practices|टिकाऊ भूमि-प्रबंधन जारी रखें|शाश्वत जमीन-व्यवस्थापन सुरू ठेवा
+Monitor periodically|समय-समय पर निगरानी करें|वेळोवेळी निरीक्षण करा
+Increase vegetation / ground cover|वनस्पति / भू-आवरण बढ़ाएँ|वनस्पती / भू-आवरण वाढवा
+Consider soil-conservation practices|मृदा-संरक्षण उपाय अपनाएँ|मृदा-संधारण उपाय करा
+Monitor soil moisture and review nutrient status|मिट्टी की नमी व पोषक स्थिति जाँचें|मातीतील ओलावा व पोषक स्थिती तपासा
+Schedule another assessment|एक और आकलन तय करें|आणखी मूल्यांकन ठरवा
+Conduct further field assessment|आगे का क्षेत्रीय आकलन करें|पुढील क्षेत्रीय मूल्यांकन करा
+Consider suitable restoration measures|उपयुक्त पुनर्स्थापन उपाय अपनाएँ|योग्य पुनर्स्थापना उपाय करा
+Investigate erosion, moisture and nutrient problems|कटाव, नमी व पोषक समस्याओं की जाँच करें|धूप, ओलावा व पोषक समस्यांची तपासणी करा
+Consult an agriculture / soil expert|कृषि / मृदा विशेषज्ञ से सलाह लें|कृषी / माती तज्ज्ञांचा सल्ला घ्या
+Monitor the land closely|भूमि की बारीकी से निगरानी करें|जमिनीवर बारकाईने लक्ष ठेवा
+General guidance only — not a replacement for professional agricultural advice.|केवल सामान्य मार्गदर्शन — पेशेवर कृषि सलाह का विकल्प नहीं।|फक्त सर्वसाधारण मार्गदर्शन — व्यावसायिक कृषी सल्ल्याला पर्याय नाही.
+Export PDF / Print|PDF निर्यात / प्रिंट|PDF निर्यात / प्रिंट
+Land health over time|समय के साथ भूमि स्वास्थ्य|कालानुसार जमीन आरोग्य
+Degradation % over time|समय के साथ क्षरण %|कालानुसार ऱ्हास %
+Soil health over time|समय के साथ मृदा स्वास्थ्य|कालानुसार माती आरोग्य
+No data.|कोई डेटा नहीं।|डेटा नाही.
+EARLY WARNING|पूर्व चेतावनी|पूर्व इशारा
+Land health is declining rapidly|भूमि स्वास्थ्य तेज़ी से गिर रहा है|जमिनीचे आरोग्य वेगाने घसरत आहे
+Schedule a new soil assessment and consult an agriculture/soil expert.|नया मृदा आकलन तय करें और कृषि/मृदा विशेषज्ञ से सलाह लें।|नवीन माती मूल्यांकन ठरवा व कृषी/माती तज्ज्ञांचा सल्ला घ्या.
+Analysis history|विश्लेषण इतिहास|विश्लेषण इतिहास
+Open|खोलें|उघडा
+Before & after|पहले और बाद में|आधी आणि नंतर
+From|से|पासून
+To|तक|पर्यंत
+Change:|बदलाव:|बदल:
+Schematic plot map (lat/lng scaled; no base map in prototype)|योजनात्मक प्लॉट नक्शा (प्रोटोटाइप में बेस मैप नहीं)|आराखडा प्लॉट नकाशा (प्रोटोटाइपमध्ये बेस मॅप नाही)
+🟢 Healthy · 🟡 Moderate · 🔴 Highly degraded · 🔵 Restoration in progress · 🟣 Restoration completed|🟢 स्वस्थ · 🟡 मध्यम · 🔴 अत्यधिक क्षरित · 🔵 पुनर्स्थापन जारी · 🟣 पूर्ण|🟢 निरोगी · 🟡 मध्यम · 🔴 अत्यंत ऱ्हास · 🔵 पुनर्स्थापना सुरू · 🟣 पूर्ण
+Click a plot marker for details.|विवरण के लिए प्लॉट मार्कर पर क्लिक करें।|तपशीलासाठी प्लॉट मार्करवर क्लिक करा.
+Current health:|वर्तमान स्वास्थ्य:|सध्याचे आरोग्य:
+Previous:|पिछला:|मागील:
+Trend:|रुझान:|कल:
+declining|गिरता हुआ|घसरत
+improving|सुधरता हुआ|सुधारत
+stable|स्थिर|स्थिर
+Last analysis:|अंतिम विश्लेषण:|शेवटचे विश्लेषण:
+Owner:|मालिक:|मालक:
+Hidden (privacy)|छिपा (गोपनीयता)|लपवलेले (गोपनीयता)
+Soil health:|मृदा स्वास्थ्य:|माती आरोग्य:
+New restoration project|नई पुनर्स्थापन परियोजना|नवीन पुनर्स्थापना प्रकल्प
+Create project|परियोजना बनाएँ|प्रकल्प तयार करा
+Restoration progress:|पुनर्स्थापन प्रगति:|पुनर्स्थापना प्रगती:
+Milestones|मील के पत्थर|टप्पे
+Timeline|समयरेखा|कालरेषा
+Soil assessment|मृदा आकलन|माती मूल्यांकन
+Expert consultation|विशेषज्ञ परामर्श|तज्ज्ञ सल्ला
+Soil conservation activity|मृदा संरक्षण गतिविधि|मृदा संधारण उपक्रम
+Vegetation restoration|वनस्पति पुनर्स्थापन|वनस्पती पुनर्स्थापना
+Follow-up analysis|अनुवर्ती विश्लेषण|पाठपुरावा विश्लेषण
+Pending|लंबित|प्रलंबित
+In progress|जारी|सुरू
+advance|आगे बढ़ाएँ|पुढे न्या
+No projects.|कोई परियोजना नहीं।|प्रकल्प नाहीत.
+Expert & researcher directory|विशेषज्ञ व शोधकर्ता निर्देशिका|तज्ज्ञ व संशोधक निर्देशिका
+Verified|सत्यापित|सत्यापित
+Request consultation|परामर्श का अनुरोध करें|सल्ला मागवा
+Secure chat|सुरक्षित चैट|सुरक्षित चॅट
+AI assistant|एआई सहायक|एआय सहाय्यक
+Send|भेजें|पाठवा
+Type message…|संदेश लिखें…|संदेश लिहा…
+Mark as read|पढ़ा हुआ चिह्नित करें|वाचले म्हणून चिन्हांकित करा
+Read|पढ़ा गया|वाचले
+No notifications.|कोई सूचना नहीं।|सूचना नाहीत.
+Early warning —|पूर्व चेतावनी —|पूर्व इशारा —
+Monitoring reminder —|निगरानी अनुस्मारक —|निरीक्षण स्मरणपत्र —
+Time for your next land-health assessment.|अगले भूमि-स्वास्थ्य आकलन का समय।|पुढील जमीन-आरोग्य मूल्यांकनाची वेळ.
+Soil test reminder —|मृदा परीक्षण अनुस्मारक —|माती चाचणी स्मरणपत्र —
+This land has no measured soil-test data yet.|इस भूमि का अभी कोई मापित मृदा डेटा नहीं।|या जमिनीचा अजून मोजलेला माती डेटा नाही.
+Land health fell:|भूमि स्वास्थ्य गिरा:|जमीन आरोग्य घसरले:
+New message|नया संदेश|नवीन संदेश
+New reply from|नया उत्तर:|नवीन उत्तर:`.split("\n").map(l=>l.split("|")).sort((a,b)=>b[0].length-a[0].length).map(d=>[d[0],d[1],d[2],d[0].length<5?new RegExp("\\b"+d[0]+"\\b","g"):null]);
+function tr(){const li=LI();document.documentElement.lang=S.lang;if(!li)return;const root=$("#app"),w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){let v=n.nodeValue;if(!v.trim())continue;for(const d of D)v=d[3]?v.replace(d[3],d[li]):v.split(d[0]).join(d[li]);n.nodeValue=v}
+root.querySelectorAll("[placeholder]").forEach(e=>{const d=D.find(x=>x[0]==e.placeholder);if(d)e.placeholder=d[li]})}
+function render(){$("#app").innerHTML=U()?shell(V[view]()):home();tr()}
+function go(v){view=v;render();scrollTo(0,0)}
+function setLang(l){S.lang=l;save();render()}
+function login(){const n=$("#nm").value.trim();if(!n)return alert("Please enter your name.");S.user={name:n,role:$("#rl").value};save();view="dash";render()}
+function logout(){S.user=null;save();render()}
+function addPlot(){const g=i=>$("#"+i).value.trim();if(!g("pnm")||!g("pds"))return alert("Plot name and district are required.");const code=g("pds").slice(0,3).toUpperCase();const n=S.plots.filter(p=>p.id.startsWith("LAND-"+code)).length+1;
+S.plots.push({id:`LAND-${code}-${String(n).padStart(3,"0")}`,name:g("pnm"),district:g("pds"),state:g("pst"),area:g("par"),type:g("pty"),crop:g("pcr"),lat:g("plt")||null,lng:g("pln")||null,owner:U().name});save();render()}
+function newProj(){const id=$("#np").value;S.proj.push({plot:id,progress:0,done:false,ms:["Soil assessment","Expert consultation","Soil conservation activity","Vegetation restoration","Follow-up analysis"].map(x=>[x,0]),tl:[[new Date().toLocaleString("en",{month:"long"}),"Problem identified"]]});save();render()}
+function adv(i,j){const x=S.proj[i],m=x.ms[j];if(m[1]<2){m[1]++;x.tl.push([new Date().toLocaleString("en",{month:"long"}),m[0]+(m[1]==2?" completed":" started")])}x.progress=Math.round(x.ms.reduce((s,m)=>s+m[1],0)/(x.ms.length*2)*100);x.done=x.progress==100;save();render()}
+function consult(i){const e=EX[i],p=mine()[0];S.chat.push({id:Date.now(),with:e[0],type:"Consultation: "+e[1],plot:p?.id,msgs:[{from:"me",text:"Hello, I would like guidance on land health for "+(p?.id||"my land")+".",ts:Date.now()}]});save();render()}
+function send(i){const v=$("#cm"+i).value.trim();if(!v)return;S.chat[i].msgs.push({from:"me",text:v,ts:Date.now()});save();render()}
+render();
+</script></body></html>
